@@ -1,0 +1,41 @@
+
+services:
+  admin:
+    build:
+      context: ./adminggg
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./adminggg:/usr/src/app
+    working_dir: /usr/src/app
+    command: node serveradmin.js
+
+  graphql:
+    build:
+      context: ./graphql_development
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./graphql_development:/usr/src/app
+    working_dir: /usr/src/app
+    command: node server.js
+
+  web:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: node server.js
+
+  websocket:
+    build:
+      context: .
+    ports:
+      - "4040:4040"
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: node websocket.js
